@@ -1,0 +1,92 @@
+##############################
+# Node.js / Backend Ignored Files
+##############################
+
+# Node modules
+purecure_backend/node_modules/
+
+# Environment variables
+purecure_backend/.env
+purecure_backend/.env.local
+purecure_backend/.env.*.local
+
+# Logs
+purecure_backend/npm-debug.log*
+purecure_backend/yarn-debug.log*
+purecure_backend/yarn-error.log*
+purecure_backend/pnpm-debug.log*
+purecure_backend/logs/
+purecure_backend/*.log
+
+# Build / Output
+purecure_backend/dist/
+purecure_backend/build/
+purecure_backend/coverage/
+
+# Database files (if any)
+purecure_backend/*.sqlite
+purecure_backend/*.db
+
+
+##############################
+# React / Frontend Ignored Files
+##############################
+
+# Node modules
+purecure_frontend/node_modules/
+
+# Build output
+purecure_frontend/build/
+purecure_frontend/dist/
+
+# Cache
+purecure_frontend/.cache/
+purecure_frontend/.parcel-cache/
+purecure_frontend/.vite/
+
+# Environment files
+purecure_frontend/.env
+purecure_frontend/.env.local
+purecure_frontend/.env.development.local
+purecure_frontend/.env.production.local
+purecure_frontend/.env.test.local
+
+# Debug logs
+purecure_frontend/npm-debug.log*
+purecure_frontend/yarn-debug.log*
+purecure_frontend/yarn-error.log*
+purecure_frontend/pnpm-debug.log*
+
+
+##############################
+# Common / Root-level ignores
+##############################
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDE Files
+.vscode/
+.vscode/*
+.idea/
+*.swp
+
+# General cache
+*.cache
+*.tmp
+*.temp
+
+# Production deployment folders
+.env
+.env.*
+
+# Dependency directories
+node_modules/
+
+# Optional backup files
+*.bak
+*.old
+
+# Misc
+*.log
