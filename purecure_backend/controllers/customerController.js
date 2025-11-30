@@ -1,52 +1,44 @@
-const customers = require("../models/customerModel");
+const customerModel = require("../models/customerModel");
 
-// GET ALL CUSTOMERS
-const getAllCustomers = (req, res) => {
-  res.json(customers);
+// CREATE CUSTOMER
+exports.createCustomer = async (req, res) => {
+  const { name, email, role } = req.body;
+  const user = await customerModel.createCustomer(name, email, role);
+  res.json(user);
 };
 
-// GET SINGLE CUSTOMER
-const getCustomerById = (req, res) => {
-  const id = parseInt(req.params.id);
-  const customer = customers.find((c) => c.id === id);
-
-  if (!customer) {
-    return res.status(404).json({ message: "Customer not found" });
-  }
-
-  res.json(customer);
+// GET ALL CUSTOMER
+exports.getCustomers = async (req, res) => {
+  const users = await customerModel.getCustomers();
+  res.json(users);
 };
 
-// ADD CUSTOMER
-const addCustomer = (req, res) => {
-  const { name, email } = req.body;
+// GET CUSTOMER BY ID
+exports.getCustomerById = async (req, res) => {
+  const user = await customerModel.getCustomerById(req.params.id);
+  res.json(user);
+};
 
-  const newCustomer = {
-    id: customers.length + 1,
+// UPDATE CUSTOMER (PUT)
+exports.updateCustomer = async (req, res) => {
+  const { name, email, role } = req.body;
+  const user = await customerModel.updateCustomer(
+    req.params.id,
     name,
     email,
-  };
+    role
+  );
+  res.json(user);
+};
 
-  customers.push(newCustomer);
-  res.status(201).json(newCustomer);
+// PATCH (partial update)
+exports.patchCustomer = async (req, res) => {
+  const user = await customerModel.patchCustomer(req.params.id, req.body);
+  res.json(user);
 };
 
 // DELETE CUSTOMER
-const deleteCustomer = (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = customers.findIndex((c) => c.id === id);
-
-  if (index === -1) {
-    return res.status(404).json({ message: "Customer not found" });
-  }
-
-  customers.splice(index, 1);
-  res.json({ message: "Customer deleted successfully" });
-};
-
-module.exports = {
-  getAllCustomers,
-  getCustomerById,
-  addCustomer,
-  deleteCustomer,
+exports.deleteCustomer = async (req, res) => {
+  const user = await customerModel.deleteCustomer(req.params.id);
+  res.json(user);
 };

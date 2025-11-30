@@ -7,10 +7,15 @@ app.use(express.json());
 app.use(cors());
 
 // Import Routes
-const customerRoutes = require("./routes/customerRoute");
+const customerRoute = require("./routes/customerRoute");
+
+
 
 // Routes
-app.use("/customers", customerRoutes);
+app.use("/customers", customerRoute);
+
+
+
 
 // Default route
 app.get("/", (req, res) => {

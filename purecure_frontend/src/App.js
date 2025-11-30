@@ -9,7 +9,11 @@ import "./App.css";
 
 function App() {
   const [customers, setCustomers] = useState([]);
-  const [newCustomer, setNewCustomer] = useState({ name: "", email: "" });
+  const [newCustomer, setNewCustomer] = useState({
+    name: "",
+    email: "",
+    role: "user",
+  });
 
   // Fetch customers on load
   const loadCustomers = async () => {
@@ -27,10 +31,13 @@ function App() {
 
   // Add new customer
   const handleAdd = async () => {
-    if (!newCustomer.name || !newCustomer.email) return alert("Enter details");
+    if (!newCustomer.name || !newCustomer.email)
+      return alert("Enter name and email");
 
+    // send name, email, role
     await addCustomer(newCustomer);
-    setNewCustomer({ name: "", email: "" });
+
+    setNewCustomer({ name: "", email: "", role: "user" });
     loadCustomers();
   };
 
@@ -40,12 +47,12 @@ function App() {
     loadCustomers();
   };
 
-  // Update customer (example updates name)
+  // Update customer (example: update name only via PATCH)
   const handleUpdate = async (id) => {
     const updatedName = prompt("Enter new name:");
     if (!updatedName) return;
 
-    await updateCustomer(id, { name: updatedName });
+    await updateCustomer(id, { name: updatedName }); // PATCH, backend will only update name
     loadCustomers();
   };
 
@@ -54,7 +61,7 @@ function App() {
       <h1>Customer Management</h1>
 
       {/* Add Form */}
-      <div>
+      <div className="form-row">
         <input
           type="text"
           placeholder="Name"
@@ -71,6 +78,15 @@ function App() {
             setNewCustomer({ ...newCustomer, email: e.target.value })
           }
         />
+        <select
+          value={newCustomer.role}
+          onChange={(e) =>
+            setNewCustomer({ ...newCustomer, role: e.target.value })
+          }
+        >
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
         <button onClick={handleAdd}>Add Customer</button>
       </div>
 
@@ -80,9 +96,14 @@ function App() {
       <ul>
         {customers.map((c) => (
           <li key={c.id}>
-            <strong>{c.name}</strong> - {c.email}
-            <button onClick={() => handleUpdate(c.id)}>Update</button>
-            <button onClick={() => handleDelete(c.id)}>Delete</button>
+            <div>
+              <strong>{c.name}</strong> - {c.email}{" "}
+              <span className="role-tag">[{c.role}]</span>
+            </div>
+            <div>
+              <button onClick={() => handleUpdate(c.id)}>Update</button>
+              <button onClick={() => handleDelete(c.id)}>Delete</button>
+            </div>
           </li>
         ))}
       </ul>
