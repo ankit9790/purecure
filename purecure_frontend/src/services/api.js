@@ -1,5 +1,6 @@
 import axios from "axios";
-const API_URL = process.env.REACT_APP_BACKEND_URL;
+const API_URL = `${process.env.REACT_APP_BACKEND_URL}/customers`;
+
 
 // const API_URL = "http://localhost:3000/customers";
 
