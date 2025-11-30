@@ -1,25 +1,23 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL, // e.g. "http://localhost:5000"
+  baseURL: process.env.REACT_APP_BACKEND_URL,
 });
 
-// ---- CUSTOMER APIS ----
-
-// GET all customers
+// GET all
 export const getCustomers = () => api.get("/customers");
 
-// GET single customer
+// GET by ID
 export const getCustomerById = (id) => api.get(`/customers/${id}`);
 
-// ADD customer  (name, email, role)
+// ADD (name, email, role)
 export const addCustomer = (customer) => api.post("/customers", customer);
 
-// UPDATE customer (PARTIAL UPDATE -> uses PATCH in backend)
+// UPDATE (PUT requires full body)
 export const updateCustomer = (id, customer) =>
-  api.patch(`/customers/${id}`, customer);
+  api.put(`/customers/${id}`, customer);
 
-// DELETE customer
+// DELETE
 export const deleteCustomer = (id) => api.delete(`/customers/${id}`);
 
 export default api;

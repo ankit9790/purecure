@@ -2,7 +2,7 @@
 const pool = require("../connection/db");
 
 // CREATE CUSTOMER
-async function createCustomer(name, email, role) {
+async function createCustomer(name, email, role="customer") {
   const query = `
     INSERT INTO customers (name, email, role)
     VALUES ($1, $2, $3)

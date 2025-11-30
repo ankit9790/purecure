@@ -12,47 +12,43 @@ function App() {
   const [newCustomer, setNewCustomer] = useState({
     name: "",
     email: "",
-    role: "user",
+    role: "customer",
   });
 
-  // Fetch customers on load
   const loadCustomers = async () => {
-    try {
-      const res = await getCustomers();
-      setCustomers(res.data);
-    } catch (error) {
-      console.error("Error loading customers:", error);
-    }
+    const res = await getCustomers();
+    setCustomers(res.data);
   };
 
   useEffect(() => {
     loadCustomers();
   }, []);
 
-  // Add new customer
   const handleAdd = async () => {
-    if (!newCustomer.name || !newCustomer.email)
-      return alert("Enter name and email");
+    if (!newCustomer.name || !newCustomer.email) return alert("Enter details");
 
-    // send name, email, role
     await addCustomer(newCustomer);
-
-    setNewCustomer({ name: "", email: "", role: "user" });
+    setNewCustomer({ name: "", email: "", role: "customer" });
     loadCustomers();
   };
 
-  // Delete customer
   const handleDelete = async (id) => {
     await deleteCustomer(id);
     loadCustomers();
   };
 
-  // Update customer (example: update name only via PATCH)
   const handleUpdate = async (id) => {
     const updatedName = prompt("Enter new name:");
-    if (!updatedName) return;
+    const updatedRole = prompt("Enter new role (admin/customer):");
 
-    await updateCustomer(id, { name: updatedName }); // PATCH, backend will only update name
+    if (!updatedName || !updatedRole) return;
+
+    await updateCustomer(id, {
+      name: updatedName,
+      role: updatedRole,
+      email: customers.find((c) => c.id === id).email,
+    });
+
     loadCustomers();
   };
 
@@ -60,8 +56,7 @@ function App() {
     <div className="App">
       <h1>Customer Management</h1>
 
-      {/* Add Form */}
-      <div className="form-row">
+      <div>
         <input
           type="text"
           placeholder="Name"
@@ -70,6 +65,7 @@ function App() {
             setNewCustomer({ ...newCustomer, name: e.target.value })
           }
         />
+
         <input
           type="email"
           placeholder="Email"
@@ -78,32 +74,27 @@ function App() {
             setNewCustomer({ ...newCustomer, email: e.target.value })
           }
         />
-        <select
+
+        <input
+          type="text"
+          placeholder="Role (default: customer)"
           value={newCustomer.role}
           onChange={(e) =>
             setNewCustomer({ ...newCustomer, role: e.target.value })
           }
-        >
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
+        />
+
         <button onClick={handleAdd}>Add Customer</button>
       </div>
 
       <hr />
 
-      {/* Customer List */}
       <ul>
         {customers.map((c) => (
           <li key={c.id}>
-            <div>
-              <strong>{c.name}</strong> - {c.email}{" "}
-              <span className="role-tag">[{c.role}]</span>
-            </div>
-            <div>
-              <button onClick={() => handleUpdate(c.id)}>Update</button>
-              <button onClick={() => handleDelete(c.id)}>Delete</button>
-            </div>
+            <strong>{c.name}</strong> - {c.email} - {c.role}
+            <button onClick={() => handleUpdate(c.id)}>Update</button>
+            <button onClick={() => handleDelete(c.id)}>Delete</button>
           </li>
         ))}
       </ul>
