@@ -1,110 +1,35 @@
-/* Overall Layout */
 .App {
-  max-width: 600px;
-  margin: 40px auto;
+  width: 80%;
+  margin: auto;
+  font-family: Arial;
+}
+
+.card {
   padding: 20px;
-  font-family: "Inter", sans-serif;
-  color: #222;
-}
-
-/* Title */
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 28px;
-  font-weight: 600;
-}
-
-/* Form Container */
-.form-row {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   margin-bottom: 20px;
 }
 
-/* Inputs & Select */
-input,
-select {
+.card input {
   padding: 10px;
-  flex: 1;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: 0.2s;
+  margin: 5px;
+  width: 220px;
 }
 
-input:focus,
-select:focus {
-  outline: none;
-  border-color: #6c5ce7;
-  box-shadow: 0 0 5px rgba(108, 92, 231, 0.3);
-}
-
-/* Buttons */
 button {
-  padding: 10px 14px;
-  background: #6c5ce7;
-  color: white;
-  border: none;
-  border-radius: 6px;
+  padding: 8px 14px;
+  margin: 5px;
   cursor: pointer;
-  font-size: 14px;
-  transition: 0.2s;
 }
 
-button:hover {
-  background: #5848d6;
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-/* List Style */
-ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 10px;
-}
-
-li {
-  background: #f9f9f9;
-  padding: 14px;
-  margin: 10px 0;
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-}
-
-li strong {
-  font-size: 16px;
-}
-
-/* Update & Delete Buttons */
-li button {
-  margin-left: 8px;
-  padding: 6px 10px;
-  font-size: 12px;
-}
-
-li button:nth-child(1) {
-  background: #0984e3;
-}
-
-li button:nth-child(1):hover {
-  background: #0868ba;
-}
-
-li button:nth-child(2) {
-  background: #d63031;
-}
-
-li button:nth-child(2):hover {
-  background: #b42425;
-}
-
-/* Role badge */
-.role-tag {
-  font-size: 12px;
-  margin-left: 6px;
-  opacity: 0.8;
+table th,
+table td {
+  border: 1px solid #ccc;
+  padding: 8px;
 }
