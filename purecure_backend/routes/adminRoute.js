@@ -8,7 +8,6 @@ router.post("/", adminController.createAdmin);
 router.get("/", adminController.getAdmins);
 router.get("/:id", adminController.getAdminById);
 router.put("/:id", adminController.updateAdmin);
-router.patch("/:id", adminController.patchAdmin);
 router.delete("/:id", adminController.deleteAdmin);
 
 // ----- ADMIN → CUSTOMER OPERATIONS -----

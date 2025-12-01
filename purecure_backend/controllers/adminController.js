@@ -29,12 +29,6 @@ exports.updateAdmin = async (req, res) => {
   res.json(admin);
 };
 
-// PATCH ADMIN
-exports.patchAdmin = async (req, res) => {
-  const admin = await adminModel.patchAdmin(req.params.id, req.body);
-  res.json(admin);
-};
-
 // DELETE ADMIN
 exports.deleteAdmin = async (req, res) => {
   const admin = await adminModel.deleteAdmin(req.params.id);

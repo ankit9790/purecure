@@ -8,7 +8,6 @@ router.post("/", customerController.createCustomer);
 router.get("/", customerController.getCustomers);
 router.get("/:id", customerController.getCustomerById);
 router.put("/:id", customerController.updateCustomer);
-router.patch("/:id", customerController.patchCustomer);
 router.delete("/:id", customerController.deleteCustomer);
 
 

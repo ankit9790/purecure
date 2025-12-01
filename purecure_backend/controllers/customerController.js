@@ -31,12 +31,6 @@ exports.updateCustomer = async (req, res) => {
   res.json(user);
 };
 
-// PATCH (partial update)
-exports.patchCustomer = async (req, res) => {
-  const user = await customerModel.patchCustomer(req.params.id, req.body);
-  res.json(user);
-};
-
 // DELETE CUSTOMER
 exports.deleteCustomer = async (req, res) => {
   const user = await customerModel.deleteCustomer(req.params.id);

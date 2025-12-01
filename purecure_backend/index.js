@@ -9,11 +9,20 @@ app.use(cors());
 // Import Routes
 const customerRoute = require("./routes/customerRoute");
 const adminRoute = require("./routes/adminRoute");
+const authRoute = require("./routes/authRoute");
+const productRoute = require("./routes/productRoute");
+const orderRoute = require("./routes/orderRoute");
+
+
+
 
 
 // Routes
 app.use("/customers", customerRoute);
 app.use("/admins", adminRoute);
+app.use("/auth", authRoute);    
+app.use("/products", productRoute);
+app.use("/orders", orderRoute);
 
 
 
@@ -23,7 +32,7 @@ app.get("/", (req, res) => {
 });
 
 // PORT for both Local and Render
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8001;
 
 // Start server
 app.listen(PORT, () => {

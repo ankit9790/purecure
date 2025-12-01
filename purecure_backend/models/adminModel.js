@@ -37,23 +37,7 @@ async function updateAdmin(id, name, email, role) {
   return result.rows[0];
 }
 
-// PATCH ADMIN (partial update)
-async function patchAdmin(id, data) {
-  const fields = Object.keys(data);
-  const values = Object.values(data);
 
-  const setQuery = fields.map((field, i) => `${field} = $${i + 1}`).join(", ");
-
-  const query = `
-    UPDATE admins
-    SET ${setQuery}
-    WHERE id = $${fields.length + 1}
-    RETURNING *;
-  `;
-  
-  const result = await pool.query(query, [...values, id]);
-  return result.rows[0];
-}
 
 // DELETE ADMIN
 async function deleteAdmin(id) {
@@ -69,6 +53,5 @@ module.exports = {
   getAdmins,
   getAdminById,
   updateAdmin,
-  patchAdmin,
   deleteAdmin,
 };

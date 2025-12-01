@@ -38,24 +38,6 @@ async function updateCustomer(id, name, email, role) {
   return result.rows[0];
 }
 
-// PATCH → PARTIAL UPDATE
-async function patchCustomer(id, data) {
-  const fields = Object.keys(data);
-  const values = Object.values(data);
-
-  const setQuery = fields.map((field, i) => `${field} = $${i + 1}`).join(", ");
-
-  const query = `
-    UPDATE customers
-    SET ${setQuery}
-    WHERE id = $${fields.length + 1}
-    RETURNING *;
-  `;
-
-  const result = await pool.query(query, [...values, id]);
-  return result.rows[0];
-}
-
 // DELETE CUSTOMER
 async function deleteCustomer(id) {
   const result = await pool.query(
@@ -71,6 +53,5 @@ module.exports = {
   getCustomers,
   getCustomerById,
   updateCustomer,
-  patchCustomer,
   deleteCustomer,
 };
