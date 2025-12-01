@@ -8,12 +8,12 @@ app.use(cors());
 
 // Import Routes
 const customerRoute = require("./routes/customerRoute");
-
+const adminRoute = require("./routes/adminRoute");
 
 
 // Routes
 app.use("/customers", customerRoute);
-
+app.use("/admins", adminRoute);
 
 
 
